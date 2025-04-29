@@ -9,6 +9,7 @@ import MyInput from './components/UI/input/MyInput';
 import PostForm from './components/PostForm';
 import MySelect from './components/UI/select/MySelect';
 import PostFilter from './components/PostFilter';
+import MyModal from './components/UI/MyModal/MyModal';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -41,7 +42,9 @@ function App() {
   
   return (
     <div className="App">
-      <PostForm create={createPost}/>
+      <MyModal visible={false}>
+        <PostForm create={createPost}/>
+      </MyModal>
       <PostFilter filter={filter} setFilter={setFilter}/>
       <PostList remove={removePost} posts={sortedAndSearchedPosts} title={'Посты про JS'}/>
     </div>

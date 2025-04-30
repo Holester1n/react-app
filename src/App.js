@@ -20,6 +20,9 @@ function App() {
   ]);
   const [body, setBody] = useState('');
   const [filter, setFilter] = useState({sort: '', query: ''});
+  const [modal, setModal] = useState(false);
+
+
 
   const sortedPosts = useMemo(() => {
     if (filter.sort) {
@@ -34,6 +37,7 @@ function App() {
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
+    setModal(false);
   }
 
   const removePost = (post) => {
@@ -42,7 +46,10 @@ function App() {
   
   return (
     <div className="App">
-      <MyModal visible={false}>
+      <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
+        Создать пользователя
+      </MyButton>
+      <MyModal visible={modal} setVisible={setModal}>
         <PostForm create={createPost}/>
       </MyModal>
       <PostFilter filter={filter} setFilter={setFilter}/>

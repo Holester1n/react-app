@@ -9,16 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+        with:
+          persist-credentials: false
+      - name: Setup Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "github-actions-bot@users.noreply.github.com"
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20.18.0 
-
+          node-version: 20.18.0
       - name: Install dependencies
         run: npm install
-
       - name: Build and Deploy
         run: |
           npm run build
-          npm run deploy
+          npm run deploy -- -f 
